@@ -1,0 +1,16 @@
+.nav-button {
+  background-color: #282c34;
+  width: 50%;
+  transition: background-color .2s linear;
+  padding: 5px 0;
+  color: #fff;
+  &:hover {
+    background-color: yellow;
+    color: #000;
+  }
+  .items-button {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}

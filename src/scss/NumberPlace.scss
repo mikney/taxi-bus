@@ -1,0 +1,17 @@
+@import "mixins";
+.button-selected {
+  display: flex;
+}
+.number-place-button {
+  @include select();
+
+  &.button {
+    width: 33%;
+    &.selected {
+      background-color: yellow;
+      box-shadow: 0 8px 15px -10px ;;
+    }
+  }
+  box-shadow: none;
+
+}

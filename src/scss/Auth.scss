@@ -1,0 +1,62 @@
+.Auth {
+  color: #616161;
+  width: 400px;
+  margin-left: 5px;
+  font-family: Tahoma, sans-serif;
+}
+.input-tel {
+  display: flex;
+  span {
+    text-align: center;
+    //letter-spacing: 33.2px;
+    line-height: 32.5px;
+    margin-top: 3px;
+    height: 33.2px;
+    background-color: #a7a7a7;
+    border: 1px solid #c2c2c2;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    width: 35px;
+    font-size: 20px;
+  }
+}
+.label {
+  margin-left: 8px;
+  font-weight: bold;
+  display: block;
+  font-size: 14px;
+}
+.checkbox {
+  &:checked {
+    color: #e5e509;
+    background-color: #282c34;
+    //border: 1px solid #;
+    filter: invert(100%) hue-rotate(18deg) brightness(1.7);
+  }
+}
+input[type="checkbox"]:checked {
+  background-color: #e5e509;
+}
+.input {
+  outline: none;
+  border: 1px solid #c2c2c2;
+  padding: 8px;
+  width: 100%;
+  &.tel {
+    border-radius: 0 5px 5px 0;
+  }
+  border-radius: 5px;
+  margin: 3px 0 10px;
+}
+.button-auth {
+  display: block;
+  outline: none;
+  padding: 8px 19px;
+  border-radius: 10px;
+  border: 1px solid #c2c2c2;
+  background-color: #f5f500;
+  margin: 9px auto;
+  text-transform: lowercase;
+  font-weight: bold;
+  font-family: Tahoma, sans-serif;
+}
