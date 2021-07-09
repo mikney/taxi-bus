@@ -3,7 +3,11 @@ import axios from "axios";
 export const userData = (user) => {
   return {
     type: 'USERDATA',
-    user
+    id: user.id,
+    email: user.email,
+    userName: user.userName,
+    currentOrder: user.currentOrder,
+    role: user.role
   }
 }
 export const exitPage = () => {
@@ -20,6 +24,7 @@ export const auth = (email, password) => {
       const resp = await axios.post('http://localhost:5002/api/auth/login',{email, password})
       if (typeof resp.data.token !== "undefined") {
         localStorage.setItem('token', resp.data.token)
+        console.log(resp.data.user, ' data')
         dispatch(userData(resp.data.user))
       }
     } catch (e) {
@@ -27,7 +32,9 @@ export const auth = (email, password) => {
     }
   }
 }
-
+//id(pin):'60b4d7184811ab1434627939'
+// email(pin):'375295280287'
+// userName(pin):'Pasha'
 export const reAuth = () => {
   return async dispatch => {
     try {

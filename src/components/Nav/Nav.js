@@ -1,9 +1,11 @@
 import React from 'react';
 import NavButton from "./NavButton/NavButton";
 import '../../scss/Nav.scss'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {exitPage} from "../../redux/actions/auth";
-const Nav = () => {
+import { useHistory } from "react-router-dom";
+
+const Nav = ({setShow, show}) => {
   const dispatch = useDispatch()
   const nameButton  = ['Мои заказы', 'Выход']
   const buttonIcon = [<span className="material-icons">
@@ -11,7 +13,22 @@ alarm
 </span>, <span className="material-icons">
 power_settings_new
 </span> ]
-  const onClick = [null, () => dispatch(exitPage())]
+  const {role} = useSelector(state => ({role: state.auth.currentUser.role}))
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/home/");
+  }
+
+  function myOrderHandler() {
+    if(role) {
+      return () => history.push("/myorder")
+    } else {
+      return () => show === 'myorder' ? setShow(null): setShow('myorder')
+    }
+  }
+  //const onClick = [() => show === 'myorder' ? setShow(null) : setShow('myorder'), () => dispatch(exitPage())]
+  const onClick = [myOrderHandler(), () => dispatch(exitPage())]
   return (
     <div className="nav">
       {nameButton.map( (_,index) => {

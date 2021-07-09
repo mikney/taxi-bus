@@ -10,7 +10,14 @@ export default function authReducer(state = inititialState, action) {
   switch (action.type) {
     case 'USERDATA':
       return  {
-      ...state, currentUser: action.user, isLogin: true
+      ...state, currentUser: {
+          id: action.id,
+          email: action.email,
+          userName: action.userName,
+          currentOrder: action.currentOrder,
+          role: action.role
+        },
+        isLogin: true
     }
     case 'EXIT' :
       localStorage.removeItem('token')

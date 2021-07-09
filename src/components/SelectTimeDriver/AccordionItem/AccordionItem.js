@@ -11,13 +11,17 @@ import img3 from "../../../img/3878fda59ea2348bd879985e63bd5821.jpg";
 import img4 from "../../../img/d09aae0b72aa2944be7044adbcfdcc0f.jpg";
 import img5 from "../../../img/d85078b0bab7f81f23c4e92b0a4cc5eb.jpg";
 import {Transition} from "react-transition-group";
+import {useDispatch} from "react-redux";
+import {sendPassenger, setPassenger} from "../../../redux/actions/taxi";
 
-const AccordionItem = ({shown: show, index, fn }) => {
+const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carMake, numberDay }) => {
   const arr = [
     [<PowerIcon className={"button-icon"}/>, 'Розетка: Есть'],
     [<WifiIcon className={"button-icon"}/>, 'Wifi: Есть'],
     [<TvIcon className={"button-icon"}/>, 'Телевизор: Есть']
   ]
+  const style = () => { if(numpass > 6) { return {transform: "translateX(-270%)"}}}
+  const dispatch = useDispatch()
   const [hide, setHide] = useState(null)
   const FunctionalityFn = (index) => {
     if (index === hide) {
@@ -27,13 +31,17 @@ const AccordionItem = ({shown: show, index, fn }) => {
     }
 
   }
+  const driverShow = () => {
+    fn(index)
+    dispatch(setPassenger(time))
+  }
   // const [show, setShow] = useState(false)
   return (
     <div className={show ? "accordion active" : 'accordion'}>
-      <div onClick={() => fn(index)} className={show ? "time-driver-item active" : 'time-driver-item' }>
-        <div className="time">16:30</div>
+      <div onClick={() => driverShow()} className={show ? "time-driver-item active" : 'time-driver-item' }>
+        <div className="time">{time}</div>
         {/*<div className="passengers-counter"><circle className={'circle'} cx={50} cy={21}/> </div>*/}
-        <svg  width="40" height="40">
+        <svg  width="40" height="40" >
           <g
             fill="none"
           >
@@ -45,12 +53,13 @@ const AccordionItem = ({shown: show, index, fn }) => {
             <circle r="16" cx="20" cy="20"
                     stroke={show ? '#fff' : "#e5e509"}
                     strokeWidth="4"
-                    strokeDasharray="75 100"
+                    // strokeDasharray="100 100"
+                    strokeDasharray={`${(1- numpass/16) * 100} 100`}
                     transform="rotate(-90deg)"
             />
           </g>
         </svg>
-        <div className={"passengers-counter"}>12</div>
+          <div style={style()} className={"passengers-counter"}>{16 - numpass}</div>
         <img className="driver-photo" src={img} alt=""/>
         <Transition
           in={show}
@@ -58,8 +67,8 @@ const AccordionItem = ({shown: show, index, fn }) => {
         >
           {state => (
             <div className="info-driver">
-              <div className={`car-name ${state}`}>Mercedes</div>
-              <div className={`name-driver ${state}`}>Вадим скоморох</div>
+              <div className={`car-name ${state}`}>{carMake}</div>
+              <div className={`name-driver ${state}`}>{driverName}</div>
               <div className={`hidden_block ${state}`}>Водитель</div>
             </div>
         )}

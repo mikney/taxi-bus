@@ -7,9 +7,19 @@
 .user-info {
   margin-left: 10px;
 }
-.user-info-name {
+.user-name {
   font-size: 20px;
 }
 .img-icon {
   height: 50px;
+}
+.user-info-name {
+  display: flex;
+  align-items: center;
+  .change_name {
+    padding: 5px 4px 0;
+    background-color: inherit;
+    border: none;
+    transform: rotate(45deg);
+  }
 }

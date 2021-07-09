@@ -1,0 +1,17 @@
+
+
+.but {
+  border: none;
+  height: 40px;
+  background: rgba(229, 229, 9, 0.67);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease-in;
+  &:hover {
+    background: rgb(229, 229, 9);
+  }
+  &.disable {
+    cursor: no-drop;
+    background: rgba(113, 112, 112, 0.67);
+  }
+}

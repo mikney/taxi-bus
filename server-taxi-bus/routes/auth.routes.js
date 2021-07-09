@@ -1,5 +1,6 @@
 const Router = require('express')
 const User = require('../models/User')
+const Taxi = require('../models/TaxiDriver')
 const router = new Router()
 const bcrypt = require('bcryptjs')
 const config = require('config')
@@ -42,6 +43,23 @@ router.post(
         }
       })
     }
+    const taxiDriver = await Taxi.findOne({email})
+    if (taxiDriver) {
+      const isPassValid = bcrypt.compareSync(password, taxiDriver.password)
+      if (!isPassValid) {
+        return res.status(404).json({message: 'Invalid password'})
+      }
+      const token = jwt.sign({id: taxiDriver.id}, config.get('secretKey'), {expiresIn: "1h"})
+      return res.json({
+        token,
+        user: {
+          id: taxiDriver.id,
+          email: taxiDriver.email,
+          userName: taxiDriver.name,
+          role: 'taxi'
+        }
+      })
+    }
     // хешируем пароль
     const hashPass = bcrypt.hashSync(password, 7)
     // создаем нового пользователя
@@ -60,21 +78,45 @@ router.post(
 router.get("/auth", authMiddleware, async (req, res) => {
   try {
     const user = await User.findOne({_id: req.user.id})
-    if (!user) {
-      res.status.status(401).json({message: 'Hey'})
+    if (user) {
+      const token = jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: "1h"})
+      return res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          userName: user.userName,
+          currentOrder: user.currentOrder
+        }
+      })
     }
-    const token = jwt.sign({id: user.id}, config.get('secretKey'), {expiresIn: "1h"})
-    res.json({
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        userName: user.userName
-      }
-    })
+    const taxiDriver = await Taxi.findOne({_id: req.user.id})
+    if (taxiDriver) {
+      const token = jwt.sign({id: taxiDriver.id}, config.get('secretKey'), {expiresIn: "1h"})
+      return res.json({
+        token,
+        user: {
+          id: taxiDriver.id,
+          email: taxiDriver.email,
+          userName: taxiDriver.name,
+          role: 'taxi'
+        }
+      })
+    }
+    res.status(400).json({message: 'User not found'})
   } catch (e) {
     console.log(e)
   }
 })
+
+router.post('/taxisign', async (req, res) => {
+  const {email, password, name, carMake} = req.body
+  const hashPassword = bcrypt.hashSync(password,7)
+
+  const driver = new Taxi({email, password: hashPassword, name, carMake})
+  await driver.save()
+  return res.json({message: 'Driver taxi created'})
+})
+
 
 module.exports = router

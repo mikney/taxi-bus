@@ -5,12 +5,15 @@ const mongoose = require('mongoose')
 const PORT = config.get('serverPort')
 const cors = require('./middleware/cors.middleware')
 const testRoute = require('./routes/test.routes')
+
+const taxiRoute = require('./routes/addTaxiDriver.routes')
 const app = express()
 app.use(express.json())
 app.use(cors)
 // первй парам, путь по которому ройт будет обрабатываться
 app.use('/api/auth', authRoute)
 app.use('/api/test', testRoute)
+app.use('/api/taxi', taxiRoute)
 
 const start = async () => {
   try {
