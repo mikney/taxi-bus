@@ -1,0 +1,18 @@
+
+.order_table {
+  padding: 2px 3px 4px;
+  border: 2px solid #7d7c7c;
+  border-radius: 5px;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -10px, 10px 0 15px -10px  ;
+  & thead{
+    border: 2px solid #7d7c7c;
+  }
+  & td {
+    padding: 2px 13px;
+    //border-left: 2px  solid #7d7c7c;
+    //border-top: 2px solid #7d7c7c;
+
+    box-shadow: 0 10px 15px -8px
+  }
+}
