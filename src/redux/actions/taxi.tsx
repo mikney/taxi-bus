@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 
-export const setDate = (response, date) => {
+export const setDate = (response: any, date: any) => {
   console.log(date)
   return {
     type: 'SETDATE',
@@ -15,10 +15,10 @@ export const setDate = (response, date) => {
 }
 
 
-export const getTaxi = (date) => {
-  return async dispatch => {
+export const getTaxi = (date: number, month: string, from: string ) => {
+  return async (dispatch : any) => {
     try {
-    const response = await axios.post('http://localhost:5002/api/taxi/findtaxidriver', {date})
+    const response = await axios.post('http://localhost:5002/api/taxi/findtaxidriver', {date, month, from})
       console.log(response)
       if (!response.data) {
         throw new Error('data not found')
@@ -29,13 +29,13 @@ export const getTaxi = (date) => {
     }
   }
 }
-export const setPassenger = (time) => {
-  return (dispatch, store) => {
+export const setPassenger = (time: any) => {
+  return (dispatch: any, store: any) => {
     dispatch(sPas(time, store().taxi.currentDay, store().auth.currentUser.id))
   }
 }
 
-export const sPas = (time, date, passenger) => {
+export const sPas = (time: any, date: any, passenger: any) => {
   return {
     type: 'SPAS',
     time, date, passenger
@@ -43,7 +43,7 @@ export const sPas = (time, date, passenger) => {
 }
 
 export const sendPassenger = () => {
-  return async (dispatch, state) => {
+  return async (dispatch: any, state: any) => {
     try {
       const {time, date, passenger} = state().taxi.currentTaxi
       const resp = await axios.post('http://localhost:5002/api/taxi/addpassengers', {time, date, passenger})

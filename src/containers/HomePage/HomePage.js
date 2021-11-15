@@ -12,12 +12,15 @@ import DriverPassengers from "../../components/Driver/DriverPassengers";
 import CurrentOrderDriver from "../../components/Driver/CurrentOrderDriver";
 import HomeDriver from "../TaxiDriver/HomeDriver";
 import Taxi from "../TaxiDriver/Taxi";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import ToolMessage from "../../components/toolMessage/toolMessage";
+import {newMessage} from "../../redux/reducers/auth";
 
 const  HomePage = () => {
+  const dispatch = useDispatch()
   const [show, setShow] = useState(true)
   const [order, setOrder] = useState(false)
-  const {role} = useSelector(state => ({role: state.auth.currentUser.role}))
+  const {role, message} = useSelector(state => ({role: state.auth.currentUser.role, message: state.auth.message}))
   console.log(show)
   const template = <>
     <UserInfo/>
@@ -62,6 +65,14 @@ const  HomePage = () => {
 
     </>
   }
+
+
+  function newMessages() {
+    setTimeout(() => {
+      dispatch(newMessage(''))
+    }, 1000)
+    return <ToolMessage message={message} />
+  }
   return (
     <div className="container">
 
@@ -82,6 +93,7 @@ const  HomePage = () => {
       {/*  <PlaceOrder />*/}
       {/*  </>*/}
       {/*}*/}
+      {message ? newMessages() : ''}
     </div>
   )
 }

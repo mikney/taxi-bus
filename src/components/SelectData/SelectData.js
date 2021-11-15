@@ -34,7 +34,7 @@ const SelectData = (props) => {
     dispatch(getTaxi(index))
   }
   React.useEffect(() => {
-    dispatch(getTaxi(currentDay))
+    dispatch(getTaxi(currentDay, 'Ноябрь', 'Барановичи'))
   }, [])
   const classes = (() =>  {
 

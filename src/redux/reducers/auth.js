@@ -1,8 +1,10 @@
+import createSpacing from "@material-ui/core/styles/createSpacing";
 
 const inititialState = {
   text: 'Hello chlopak',
   currentUser: {},
-  isLogin: false
+  isLogin: false,
+  message: '',
 }
 
 
@@ -26,8 +28,18 @@ export default function authReducer(state = inititialState, action) {
         currentUser: {},
         isLogin: false
       }
+    case 'NEWMESSAGE' :
+      return  {
+        ...state, message: action.payload
+      }
     default: return {
       ...state
     }
   }
 }
+
+export const newMessage = (message) => ({
+  type: 'NEWMESSAGE',
+  payload: message
+
+})

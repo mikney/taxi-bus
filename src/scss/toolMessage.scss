@@ -1,0 +1,13 @@
+.wrapper-message {
+  position: absolute;
+  width: 200px;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #e5e509;
+  border-radius: 5px;
+  .message {
+    color: #d4d4d4;
+  }
+}
