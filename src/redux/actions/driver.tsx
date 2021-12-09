@@ -1,5 +1,9 @@
 import axios, {AxiosResponse} from "axios";
-import {newMessage} from "../reducers/auth";
+
+
+// @ts-ignore
+import {newMessage} from "../reducers/auth.ts";
+import {getTaxi} from "./taxi";
 
 
 export const drives = (resp: any) => {
@@ -22,13 +26,15 @@ export const getPass = () => {
   }
 }
 
-export const addDriverDate = (date: any, taxiDriver: any, time: string) => {
+export const addDriverDate = (date: any, taxiDriver: any, time: string, month: any, from: string) => {
   return async (dispatch: any) => {
     try {
-      const resp: {message: any} = await axios.post('http://localhost:5002/api/taxi/adddate', {date, taxiDriver, time, month: 'Ноябрь', from: 'Барановичи' })
+      const resp: {message: any} = await axios.post('http://localhost:5002/api/taxi/adddate', {date, taxiDriver, time, month, from})
       console.log(resp.message)
-      dispatch(newMessage('Добавлено саввава'))
+      dispatch(getTaxi(date, month, from))
+      dispatch(newMessage('Добавлено!'))
     } catch (e) {
+      dispatch(newMessage('Ошибка...'))
       console.log(e)
     }
   }

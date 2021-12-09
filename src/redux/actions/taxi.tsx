@@ -23,12 +23,13 @@ export const getTaxi = (date: number, month: string, from: string ) => {
       if (!response.data) {
         throw new Error('data not found')
       }
-    dispatch(setDate(response.data, date))
+    dispatch(setDate(response.data, {date, month}))
     } catch (e) {
       console.log(e)
     }
   }
 }
+
 export const setPassenger = (time: any) => {
   return (dispatch: any, store: any) => {
     dispatch(sPas(time, store().taxi.currentDay, store().auth.currentUser.id))
@@ -46,7 +47,7 @@ export const sendPassenger = () => {
   return async (dispatch: any, state: any) => {
     try {
       const {time, date, passenger} = state().taxi.currentTaxi
-      const resp = await axios.post('http://localhost:5002/api/taxi/addpassengers', {time, date, passenger})
+      const resp = await axios.post('http://localhost:5002/api/taxi/addpassengers', {passenger, time, date})
 
     } catch (e) {
       console.log(e)

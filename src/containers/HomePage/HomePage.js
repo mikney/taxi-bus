@@ -3,7 +3,7 @@ import '../../scss/HomePage.scss'
 import React, {useState} from 'react'
 import Nav from "../../components/Nav/Nav";
 import ChooseRoute from "../../components/ChooseRoute/ChooseRoute";
-import SelectData from "../../components/SelectData/SelectData";
+import SelectData from "../../components/SelectData/SelectData.tsx";
 import NumberPlace from "../../components/NumberPlace/NumberPlace";
 import SelectTimeDriver from "../../components/SelectTimeDriver/SelectTimeDriver";
 import MyOrder from "./MyOrder/MyOrder";
@@ -14,7 +14,7 @@ import HomeDriver from "../TaxiDriver/HomeDriver";
 import Taxi from "../TaxiDriver/Taxi";
 import {useDispatch, useSelector} from "react-redux";
 import ToolMessage from "../../components/toolMessage/toolMessage";
-import {newMessage} from "../../redux/reducers/auth";
+import {newMessage} from "../../redux/reducers/auth.ts";
 
 const  HomePage = () => {
   const dispatch = useDispatch()

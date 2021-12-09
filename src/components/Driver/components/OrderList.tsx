@@ -1,20 +1,22 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addDriverDate} from "../../../redux/actions/driver";
+import {RootState} from "../../../redux/reducers/rootReducer";
 
 const OrderList = () => {
 
-  const arr = ["12:00", "12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"]
+  const arr: any[] = ["12:00", "12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"]
   const dispatch = useDispatch()
-  const {taxist, date, taxiDriver} = useSelector(state => (
+  const {taxist, date, taxiDriver, from}: any = useSelector<RootState>(state => (
     {
       taxist: state.taxi.currentDate,
       date: state.taxi.currentDay,
-      taxiDriver: state.auth.currentUser.id
+      taxiDriver: state.auth.currentUser.id,
+      from: state.value.from
     }
     ))
   function f() {
-    taxist.forEach(obj => {
+    taxist.forEach((obj: any) => {
       arr[arr.indexOf(obj.time)] = {
         time: obj.time,
         name: obj.taxiDriver.name,
@@ -58,7 +60,7 @@ const OrderList = () => {
              {/*  <div><strong>Alex</strong></div>*/}
              {/*  <div>Mercedes 33233</div>*/}
              {/*</div>*/}
-             <button onClick={() => dispatch(addDriverDate(date, taxiDriver, item))} className={'but'}>Добавить</button>
+             <button onClick={() => dispatch(addDriverDate(date.date, taxiDriver, item, date.month, from))} className={'but'}>Добавить</button>
            </div>
         })}
         {/*{f1()}*/}

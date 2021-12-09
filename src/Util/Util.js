@@ -49,7 +49,7 @@ const monthCalendar = (arr) => {
     // const nextMonthDays = arr.slice(laterDays, index).concat(arr.splice(index, end))
 
     const nextMonthDays = new Array(number).fill('').concat(arr.splice(index, end))
-    const nextMonth = months[new Date().getMonth() + 1]
+    const nextMonth = months[new Date().getMonth() + 1] ? months[new Date().getMonth() + 1] : months[0]
 
     return {
       [currentMonth]: arr,
