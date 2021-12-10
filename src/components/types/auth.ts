@@ -3,14 +3,28 @@ export interface Auth {
   currentUser: CurrentUser
   isLogin: boolean
   message: string
+  isRegistration: boolean
+  waitingCode: boolean
 }
 
 export enum AuthActionTypes {
   AUTH_EXIT = 'EXIT',
   AUTH_USERDATA = 'USERDATA',
   AUTH_NEW_MESSAGE = 'NEWMESSAGE',
+  AUTH_LOGIN = 'LOGIN',
+  AUTH_REGISTR = 'REGISTRATION',
+  AUTH_WAITING = 'WAITING',
+
 }
 
+export interface Registration {
+  type: AuthActionTypes.AUTH_REGISTR
+  payload: boolean
+}
+export interface WaitingCode {
+  type: AuthActionTypes.AUTH_WAITING,
+  payload: boolean
+}
 export interface CurrentUser {
   id?: number
   email?: any
@@ -36,5 +50,10 @@ export interface  UserData {
   role: any
 }
 
+export interface SetLogin {
+  type: AuthActionTypes.AUTH_LOGIN
+  payload: boolean
+}
 
-export type UserAction = ExitPage | UserData | NewMessage
+
+export type AuthAction = ExitPage | UserData | NewMessage | SetLogin | Registration | WaitingCode

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 
-const ToolMessage: FC = ({message}: any) => {
+const ToolMessage: FC<{message: string}> = ({message}: any) => {
 
 
   return (

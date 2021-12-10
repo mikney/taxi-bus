@@ -59,4 +59,13 @@ input[type="checkbox"]:checked {
   text-transform: lowercase;
   font-weight: bold;
   font-family: Tahoma, sans-serif;
+  transition: .25s all ease-in;
+  &:hover {
+    border: 1px solid #f5f500;
+    box-shadow: 1px 1px 5px 1px #9d9d9d;
+  }
+  &:active {
+    background-color: #c5c503;
+    transition: none;
+  }
 }

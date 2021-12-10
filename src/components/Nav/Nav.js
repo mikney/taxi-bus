@@ -2,7 +2,7 @@ import React from 'react';
 import NavButton from "./NavButton/NavButton";
 import '../../scss/Nav.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {exitPage} from "../../redux/actions/auth";
+import {exitPage} from "../../redux/actions/auth.ts";
 import { useHistory } from "react-router-dom";
 
 const Nav = ({setShow, show}) => {

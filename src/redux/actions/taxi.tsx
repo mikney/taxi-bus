@@ -1,4 +1,5 @@
 import axios from "axios";
+import {checkError401} from "../../Util/checkError";
 
 
 
@@ -25,6 +26,7 @@ export const getTaxi = (date: number, month: string, from: string ) => {
       }
     dispatch(setDate(response.data, {date, month}))
     } catch (e) {
+      // checkError401(e)
       console.log(e)
     }
   }
