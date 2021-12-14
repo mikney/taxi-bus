@@ -1,12 +1,12 @@
 import UserInfo from "../../components/UserInfo/UserInfo.tsx";
 import '../../scss/HomePage.scss'
 import React, {useState} from 'react'
-import Nav from "../../components/Nav/Nav";
+import Nav from "../../components/Nav/Nav.tsx";
 import ChooseRoute from "../../components/ChooseRoute/ChooseRoute";
 import SelectData from "../../components/SelectData/SelectData.tsx";
 import NumberPlace from "../../components/NumberPlace/NumberPlace";
 import SelectTimeDriver from "../../components/SelectTimeDriver/SelectTimeDriver";
-import MyOrder from "./MyOrder/MyOrder";
+import MyOrder from "./MyOrder/MyOrder.tsx";
 import PlaceOrder from "../../Layout/PlaceOrder";
 import DriverPassengers from "../../components/Driver/DriverPassengers";
 import CurrentOrderDriver from "../../components/Driver/CurrentOrderDriver";

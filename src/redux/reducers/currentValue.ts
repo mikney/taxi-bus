@@ -2,7 +2,8 @@ import {CurrentValue, CurrentValueAction, CurrentValueActionTypes, ISetFrom} fro
 
 
 const initialState: CurrentValue = {
-  from: 'Барановичи'
+  from: 'Барановичи',
+  orderList: []
 }
 
 
@@ -13,6 +14,10 @@ export default function CurrentValueReducer(state = initialState, action: Curren
       ...state,
         from: action.payload
     }
+    case CurrentValueActionTypes.GET_ORDERS:
+      return {
+        ...state, orderList: action.payload
+      }
     default: return {
       ...state
     }
