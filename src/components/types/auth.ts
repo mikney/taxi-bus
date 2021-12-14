@@ -14,9 +14,15 @@ export enum AuthActionTypes {
   AUTH_LOGIN = 'LOGIN',
   AUTH_REGISTR = 'REGISTRATION',
   AUTH_WAITING = 'WAITING',
+  AUTH_CHANGE_NAME = "CHANGE_NAME"
 
 }
 
+
+export interface ChangeName {
+  type: AuthActionTypes.AUTH_CHANGE_NAME,
+  payload: string
+}
 export interface Registration {
   type: AuthActionTypes.AUTH_REGISTR
   payload: boolean
@@ -56,4 +62,6 @@ export interface SetLogin {
 }
 
 
-export type AuthAction = ExitPage | UserData | NewMessage | SetLogin | Registration | WaitingCode
+
+
+export type AuthAction = ExitPage | UserData | NewMessage | SetLogin | Registration | WaitingCode | ChangeName

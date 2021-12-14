@@ -1,4 +1,4 @@
-import UserInfo from "../../components/UserInfo/UserInfo";
+import UserInfo from "../../components/UserInfo/UserInfo.tsx";
 import '../../scss/HomePage.scss'
 import React, {useState} from 'react'
 import Nav from "../../components/Nav/Nav";

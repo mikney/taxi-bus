@@ -7,8 +7,16 @@
 .user-info {
   margin-left: 10px;
 }
+.user-input {
+  border: none;
+  outline: none;
+  background-color: #e5e509;
+  font-size: 20px;
+  width: 110px;
+}
 .user-name {
   font-size: 20px;
+  width: 110px;
 }
 .img-icon {
   height: 50px;
@@ -17,9 +25,9 @@
   display: flex;
   align-items: center;
   .change_name {
-    padding: 5px 4px 0;
+    padding: 0 8px 0;
     background-color: inherit;
     border: none;
-    transform: rotate(45deg);
+    //transform: rotate(45deg);
   }
 }

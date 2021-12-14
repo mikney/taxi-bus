@@ -2,6 +2,7 @@ import axios from "axios";
 import {AuthAction, AuthActionTypes, UserData} from "../../components/types/auth";
 import {Dispatch} from "redux";
 import {newMessage} from "../reducers/auth";
+import {RootState} from "../reducers/rootReducer";
 
 export const userData = (user: any): UserData => {
   return {
@@ -81,6 +82,19 @@ export const reAuth = () => {
     } catch (e) {
       console.log(e)
       localStorage.removeItem('token')
+    }
+  }
+}
+
+export const changeName = (userName: string) => {
+  return async (dispatch: Dispatch<AuthAction>, getState: () => RootState) => {
+    try {
+      const resp : any = await axios.put("http://localhost:5002/api/user/changename", {userName, id: getState().auth.currentUser.id, })
+      console.log(resp)
+      dispatch({type: AuthActionTypes.AUTH_CHANGE_NAME, payload: resp.data})
+      console.log(resp)
+    } catch (e) {
+      console.log(e)
     }
   }
 }

@@ -50,6 +50,10 @@ export default function authReducer(state = inititialState, action: AuthAction) 
     default: return {
       ...state
     }
+    case AuthActionTypes.AUTH_CHANGE_NAME:
+      return {
+        ...state, currentUser: {...state.currentUser, userName: action.payload}
+      }
   }
 }
 

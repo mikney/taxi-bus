@@ -15,7 +15,7 @@ function App() {
   function newMessages() {
     setTimeout(() => {
       dispatch(newMessage(''))
-    }, 1300)
+    }, 1700)
     return <ToolMessage message={message} />
   }
 
