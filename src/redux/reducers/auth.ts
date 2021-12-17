@@ -19,7 +19,8 @@ export default function authReducer(state = inititialState, action: AuthAction) 
           email: action.email,
           userName: action.userName,
           currentOrder: action.currentOrder,
-          role: action.role
+          role: action.role,
+          avatar: action.avatar
         },
         isLogin: true
     }
@@ -53,6 +54,10 @@ export default function authReducer(state = inititialState, action: AuthAction) 
     case AuthActionTypes.AUTH_CHANGE_NAME:
       return {
         ...state, currentUser: {...state.currentUser, userName: action.payload}
+      }
+    case AuthActionTypes.AUTH_UPLOAD_PHOTO:
+      return {
+        ...state, currentUser: {...state.currentUser, avatar: action.payload}
       }
   }
 }

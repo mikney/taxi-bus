@@ -14,7 +14,8 @@ export enum AuthActionTypes {
   AUTH_LOGIN = 'LOGIN',
   AUTH_REGISTR = 'REGISTRATION',
   AUTH_WAITING = 'WAITING',
-  AUTH_CHANGE_NAME = "CHANGE_NAME"
+  AUTH_CHANGE_NAME = "CHANGE_NAME",
+  AUTH_UPLOAD_PHOTO = "UPLOAD_PHOTO",
 
 }
 
@@ -32,12 +33,18 @@ export interface WaitingCode {
   payload: boolean
 }
 export interface CurrentUser {
+  avatar?: any
   id?: number
   email?: any
   userName?: string
   currentOrder?: any
   role?: any
 }
+export interface UploadPhoto {
+  type: AuthActionTypes.AUTH_UPLOAD_PHOTO,
+  payload: string
+}
+
 
 export interface ExitPage {
   type: AuthActionTypes.AUTH_EXIT
@@ -54,6 +61,7 @@ export interface  UserData {
   userName: any,
   currentOrder: any,
   role: any
+  avatar?: any
 }
 
 export interface SetLogin {
@@ -64,4 +72,4 @@ export interface SetLogin {
 
 
 
-export type AuthAction = ExitPage | UserData | NewMessage | SetLogin | Registration | WaitingCode | ChangeName
+export type AuthAction = ExitPage | UserData | NewMessage | SetLogin | Registration | WaitingCode | ChangeName | UploadPhoto

@@ -11,7 +11,8 @@ export const userData = (user: any): UserData => {
     email: user.email,
     userName: user.userName,
     currentOrder: user.currentOrder,
-    role: user.role
+    role: user.role,
+    avatar: user?.avatar
   }
 }
 export const exitPage = () => {
@@ -29,6 +30,7 @@ export const auth = (email: any, password: any, isLongExpire: boolean) => {
       if (typeof resp.data.token !== "undefined") {
         localStorage.setItem('token', resp.data.token)
         localStorage.setItem('longExpire', isLongExpire + '')
+        localStorage.setItem('id', resp.data.user.id)
         console.log(resp.data.user, ' data')
         dispatch(userData(resp.data.user))
       }
@@ -96,5 +98,45 @@ export const changeName = (userName: string) => {
     } catch (e) {
       console.log(e)
     }
+  }
+}
+
+export const uploadImageD = (files: any, id: any) => {
+  return async (dispatch: Dispatch<AuthAction> | any) => {
+    const file = files;
+    console.log(file)
+    console.log(files)
+    console.log(id)
+    const formData = new FormData();
+    formData.append('file', file)
+    // formData.append('id', id)
+    // formData.append('id', "hello")
+    const config = {
+      headers: {
+        "Content-Type":"multipart/form-data"
+      },
+      params: {id}
+    };
+    const resp = await axios.post("http://localhost:5002/api/test/upload", formData, config)
+    console.log(resp)
+    dispatch({type: AuthActionTypes.AUTH_UPLOAD_PHOTO, payload: resp.data.file.url})
+    dispatch(newMessage("Фотография добавлена!"))
+  }
+}
+
+export const getUserInfo = (id: string | null) => {
+  return async (dispatch: Dispatch<AuthAction>) => {
+    if (id) return
+    try {
+      const resp = await axios.get("http://localhost:5002/api/user/getuser", {params: {id}})
+      console.log(resp.data)
+      if (resp.status !== 200) {
+        console.log("resp error")
+      }
+      dispatch(userData(resp.data.user))
+    } catch (e) {
+      console.log(e)
+    }
+
   }
 }

@@ -3,6 +3,28 @@
   height: 60px;
   align-items: center;
   background-color: rgba(255, 255, 0, 0.82);
+  &__user-icon {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      height: 24px;
+      width: 24px;
+      background-image: url("https://img.icons8.com/material-outlined/24/000000/add-image.png");
+      transform: translateX(50%);
+      background-color: #e5e509;
+      opacity: 0;
+      transition: all .2s ease-in;
+      border-radius: 20%;
+    }
+    &:hover {
+      &:before {
+        opacity: 0.85;
+      }
+    }
+  }
 }
 .user-info {
   margin-left: 10px;
@@ -20,6 +42,7 @@
 }
 .img-icon {
   height: 50px;
+  border-radius: 50%;
 }
 .user-info-name {
   display: flex;
@@ -30,4 +53,46 @@
     border: none;
     //transform: rotate(45deg);
   }
+}
+
+.modal {
+  &__preview_image {
+    display: block;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    margin: 10px auto;
+  }
+}
+.input__file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+.input__error {
+  text-align: center;
+  color: #a40202;
+}
+
+.input__file-button {
+  background: #282c34;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  display: block;
+  padding: 5px 10px;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.input__file-button-text {
+  line-height: 1;
+  margin-top: 1px;
+}
+.modal-load {
+  display: block;
+  margin: 0 auto;
+  font-size: 18px;
+  width: 100%;
 }
