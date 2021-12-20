@@ -2,27 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {Link, useParams} from "react-router-dom";
+import {RootState} from "../../redux/reducers/rootReducer";
 
 const DriverPassengers = () => {
   const dispatch = useDispatch()
 
-  // const getPass = async () => {
-  //   try {
-  //     console.log('<<<<<<:::USED:::::>>>>>>')
-  //     const resp = await axios.post('http://localhost:5002/api/taxi/pdriver', {driver: "60d477b4afc3e22514f35513"})
-  //     setState(resp.data)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // };
-  //
-  // const [state, setState] = useState(null)
-  // console.log('STATTT  ',state)
-  // React.useEffect(getPass,[])
-  const [date, comeDate] = useParams()?.date.split('-')
+  const [date, comeDate] = useParams<any>()?.date.split('-')
   console.log(date, ' ', comeDate)
-  const {arr} = useSelector(state => ({arr: state.driver.pass}))
-  const passengersArr = arr.filter((item, index) => {
+  const {arr}: any = useSelector<RootState>(state => ({arr: state.driver.pass}))
+  const passengersArr = arr.filter((item: any, index: any) => {
     return (item.time === comeDate) && (item.date == date)
   })
 
@@ -30,17 +18,17 @@ const DriverPassengers = () => {
   return (
     <div>
       <h2>Текущие заказы</h2>
-      {passengersArr && passengersArr.map(item => {
+      {passengersArr && passengersArr.map((item: any) => {
         return (<div className="driverPassenger-block">
           <h2>Время отправления {item.time}</h2>
-          {item.passengers.map(phone => (
+          {item.passengers.map((phone: any) => (
             <div className="block-user">
               {phone}
               <button className="but">Подтвердить</button>
             </div>
           ))}
           <h3>Всего пассажиров: {passengersArr[0].passengers.length}</h3>
-          <Link to={'/'}><button className="but">Назад</button></Link>
+          <Link to={'/myorder'}><button className="but">Назад</button></Link>
         </div>)
       })}
 

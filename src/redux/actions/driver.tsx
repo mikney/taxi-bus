@@ -14,11 +14,14 @@ export const drives = (resp: any) => {
 }
 
 
-export const getPass = () => {
+export const getPass = (id: string) => {
   return async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
     try {
       console.log('<<<<<<:::USED:::::>>>>>>')
-      const resp = await axios.post('http://localhost:5002/api/taxi/pdriver', {driver: "60d477b4afc3e22514f35513"})
+      const resp = await axios.post('http://localhost:5002/api/taxi/pdriver', {driver: id})
+      console.log('reererer')
+
+      console.log(resp.data)
       dispatch(drives(resp.data))
     } catch (e) {
       console.log(e)

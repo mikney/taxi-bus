@@ -1,16 +1,27 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import img from "../../1926a3d1e5eb9970e0fa210c142b97a9.jpg";
 import {Transition} from "react-transition-group";
 import {toInterval} from "../../Util/Util";
 import {useHistory, useParams} from "react-router-dom";
+import distanceInWordsToNow from "date-fns/formatDistanceToNowStrict";
+import ruLocale from "date-fns/locale/ru";
 
-const CurrentOrderDriver = ({time: comeDate, date, passengers}) => {
+
+interface CurrentOrderDriverI {
+  time: any
+  date: number
+  passengers: any[]
+  month: string
+}
+
+const CurrentOrderDriver: FC<CurrentOrderDriverI> = ({time: comeDate, date, passengers, month}) => {
   const style = () => { if(passengers.length > 6) { return {transform: "translateX(-270%)"}}}
   console.log('RABOTARET')
-  const [time, setTime] = useState(0)
+  console.log(passengers)
+  const [time, setTime] = useState<any>(0)
 
   const timer = () => {
-    let newDate = new Date("2021-07-07T12:59:20")
+    let newDate = new Date().setMonth(month === "Декабрь" ? 11 : 1, date+ 1)
     const int = setInterval(()=> {
       toInterval(Math.floor((newDate - Date.now())/1000), setTime)
       if (Math.floor((newDate - Date.now())/1000) <= 0) {
@@ -18,19 +29,20 @@ const CurrentOrderDriver = ({time: comeDate, date, passengers}) => {
       }
     }, 1000)
   }
-  // useMemo(timer, [time])
-  useEffect(timer, [])
+  useEffect(() => {
+    const toDate = new Date(2021,month === "Декабрь" ? 11 : 1, date, comeDate.split(":")[0], comeDate.split(":")[1])
+    setTime(distanceInWordsToNow(toDate, { addSuffix: true, locale: ruLocale }))
+  }, [])
 
   const history = useHistory()
 
   const newLink = () => {
     history.push(`/taxi/${date}-${comeDate}`)
   }
-  // const d = useParams()
-  // console.log(d)
+
   return (
     <div className='currentOrderDriver'>
-      <h3>{date}.07</h3>
+      {/*<h3>{date} {month}</h3>*/}
       <div onClick={newLink} className={'time-driver-item driver' }>
         <div className="time">{comeDate}</div>
         {/*<div className="passengers-counter"><circle className={'circle'} cx={50} cy={21}/> </div>*/}

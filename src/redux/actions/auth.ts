@@ -126,7 +126,7 @@ export const uploadImageD = (files: any, id: any) => {
 
 export const getUserInfo = (id: string | null) => {
   return async (dispatch: Dispatch<AuthAction>) => {
-    if (id) return
+    if (!id) return
     try {
       const resp = await axios.get("http://localhost:5002/api/user/getuser", {params: {id}})
       console.log(resp.data)
