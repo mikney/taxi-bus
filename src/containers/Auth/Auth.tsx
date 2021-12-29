@@ -52,7 +52,6 @@ const Auth = () => {
             <input className='input tel' id={'tel'} onChange={e => {
               setNum(e.target.value)
             }} value={num} type="text" name='name' placeholder={'номер телефона'}/>
-
           </div>
           <label className={'label'} htmlFor={'pass'}>пароль:</label>
           <input className={'input'} id={'pass'} value={pass} onChange={e => setPass(e.target.value)} type="password"

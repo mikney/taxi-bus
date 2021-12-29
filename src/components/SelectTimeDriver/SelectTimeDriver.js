@@ -45,8 +45,17 @@ const SelectTimeDriver = ({show: showPage, setShow:setShowPage}) => {
           numpass={elem.numPass}
           driverName={elem.taxiDriver.name}
           carMake={elem.taxiDriver.carMake}
+          carPhoto={elem.taxiDriver.carPhoto}
           shown={index === show}
+          wifi={elem.taxiDriver.haveWifi}
+          tv={elem.taxiDriver.tv}
+          v220={elem.taxiDriver.v220}
           index={index}
+          avatar={elem.taxiDriver.avatar}
+          carColor={elem.taxiDriver.carColor}
+          transporter={elem.taxiDriver.transporter}
+          number={elem.taxiDriver.number}
+          driverPhone={elem.taxiDriver.email}
           fn={fn}
         />
 

@@ -1,11 +1,22 @@
 import React, {useState} from 'react';
 import WifiIcon from "@material-ui/icons/Wifi";
 import {Transition} from "react-transition-group";
+import classNames from "classnames";
+import {FC} from "react";
 
-const ButtonFunctionality = ({icon, text, index, fn, show}) => {
+interface ButtonFunctionalityI {
+  icon: any
+  text: any
+  index: any
+  fn: any
+  show: any
+  isExist: any
+}
+
+const ButtonFunctionality: FC<ButtonFunctionalityI> = ({icon, text, index, fn, show, isExist}) => {
   // const [show, setShow] = useState(false)
   return (
-    <div className={'button-functionalityn'} onClick={() => fn(index)}>
+    <div className={classNames('button-functionalityn', {"disable": !isExist})} onClick={() => fn(index)}>
       {icon}
       <Transition
         in={show}

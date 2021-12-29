@@ -14,11 +14,11 @@ import {Transition} from "react-transition-group";
 import {useDispatch} from "react-redux";
 import {sendPassenger, setPassenger} from "../../../redux/actions/taxi";
 
-const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carMake, numberDay }) => {
+const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carMake, numberDay, carPhoto, wifi, tv, v220, avatar, carColor, transporter, number, driverPhone}) => {
   const arr = [
-    [<PowerIcon className={"button-icon"}/>, 'Розетка: Есть'],
-    [<WifiIcon className={"button-icon"}/>, 'Wifi: Есть'],
-    [<TvIcon className={"button-icon"}/>, 'Телевизор: Есть']
+    [<PowerIcon className={"button-icon"}/>, `Розетка: ${v220 ? 'есть' : 'нет'}`, v220],
+    [<WifiIcon className={"button-icon"}/>, `Wifi: ${wifi ? 'есть' : 'нет'}`, wifi],
+    [<TvIcon className={"button-icon"}/>, `Телевизор: ${tv ? 'есть' : 'нет'}`, tv]
   ]
   const style = () => { if(numpass > 6) { return {transform: "translateX(-270%)"}}}
   const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carM
   }
   const driverShow = () => {
     fn(index)
-    dispatch(setPassenger(time))
+    dispatch(setPassenger(time, driverName, carMake, numberDay, carPhoto, wifi, tv, v220, avatar, carColor, transporter, number, driverPhone))
   }
   // const [show, setShow] = useState(false)
   return (
@@ -60,7 +60,7 @@ const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carM
           </g>
         </svg>
           <div style={style()} className={"passengers-counter"}>{16 - numpass}</div>
-        <img className="driver-photo" src={img} alt=""/>
+        <img className="driver-photo" src={avatar} alt=""/>
         <Transition
           in={show}
           timeout={150}
@@ -94,10 +94,10 @@ const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carM
                 <div className={'detail_first'}>Цвет:</div>
               </div>
               <div className="second-column">
-                <div className={'detail_car'}>Mercedes</div>
-                <div className={'detail_car'}>ООО "Ваджен плюс"</div>
-                <div className={'detail_car'}>7035</div>
-                <div className={'detail_car'}>Белый</div>
+                <div className={'detail_car'}>{carMake}</div>
+                <div className={'detail_car'}>{transporter}</div>
+                <div className={'detail_car'}>{number}</div>
+                <div className={'detail_car'}>{carColor}</div>
               </div>
             </div>
             <div className="add-function">
@@ -129,6 +129,7 @@ const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carM
                 <ButtonFunctionality
                   icon={item[0]}
                   text={item[1]}
+                  isExist={item[2]}
                   index={index}
                   fn={FunctionalityFn}
                   show={hide === index}
@@ -149,11 +150,9 @@ const AccordionItem = ({shown: show, index, numpass, fn, time,  driverName, carM
 
             </div>
             <div className="car-photo">
-              <img src={img1} alt=""/>
-              <img src={img2} alt=""/>
-              <img src={img3} alt=""/>
-              <img src={img4} alt=""/>
-              <img src={img5} alt=""/>
+              {carPhoto.map((urlPhoto) => {
+                return <img src={urlPhoto} alt="car-photo"/>
+              })}
             </div>
             <div className="plain-text">Официальный перевозчик. Отправление с АВТОВОКЗАЛА Барановичи платформа № 2 каждые 30 мин .Рейсы выполняются по трассе М1. Примерное время в пути 1 час и 50 минут. Водитель самостоятельно перезванивает всем пассажирам. Если водитель до Вас не смог дозвониться и Вы сами не подтвердили поездку, бронь автоматически может быть снята. Билет приобретается только у водителя в автобусе.</div>
           </div>

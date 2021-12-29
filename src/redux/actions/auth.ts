@@ -12,7 +12,8 @@ export const userData = (user: any): UserData => {
     userName: user.userName,
     currentOrder: user.currentOrder,
     role: user.role,
-    avatar: user?.avatar
+    avatar: user?.avatar,
+    infoFilled: user?.infoFilled
   }
 }
 export const exitPage = () => {

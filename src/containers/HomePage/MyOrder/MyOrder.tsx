@@ -13,7 +13,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const MyOrder = () => {
+const MyOrder = ({setShow}: any) => {
 
   const {currentOrder, id, orders}: any = useSelector<RootState>(state => ({
     currentOrder: state.auth.currentUser.currentOrder,
@@ -86,6 +86,8 @@ const MyOrder = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <button onClick={() => setShow('/')} className={"control-button but-driver"}>Назад</button>
     </div>
   );
 };

@@ -13,9 +13,11 @@ import {useDispatch, useSelector} from "react-redux";
 import ToolMessage from "../../components/toolMessage/toolMessage";
 import {newMessage} from "../../redux/reducers/auth";
 import {RootState} from "../../redux/reducers/rootReducer";
+import Admin from "../Admin/Admin";
 
 const  HomePage = () => {
   const dispatch = useDispatch()
+  // const [show, setShow] = useState<any>("placeorder")
   const [show, setShow] = useState<any>(true)
   const [order, setOrder] = useState<boolean>(false)
   const {role, message}: any = useSelector<RootState>(state => ({role: state.auth.currentUser.role, message: state.auth.message}))
@@ -37,12 +39,12 @@ const  HomePage = () => {
   }
   return (
     <div className="container">
-      {role ? < Taxi/> :
-        <>
-          <UserInfo/>
+      {role === "taxi" ? < Taxi/> :
+        role === 2 ? <>
+          <UserInfo />
           <Nav setShow={setShow} show={show}/>
           {show === "myorder" ?
-            <MyOrder/>
+            <MyOrder setShow={setShow}/>
             : show === "placeorder" ?
               <PlaceOrder setShow={setShow} show={show}/>
               : <>
@@ -53,6 +55,12 @@ const  HomePage = () => {
               </>
           }
         </>
+          : role === 3 ? <>
+            <UserInfo />
+            <Nav />
+            <Admin />
+          </>
+          : null
       }
       {message ? newMessages() : ''}
     </div>

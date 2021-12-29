@@ -221,6 +221,9 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  &.disable {
+    background-color: #7d7c7c;
+  }
 }
 .button-transition {
   overflow: hidden;

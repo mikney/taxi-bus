@@ -20,7 +20,8 @@ export default function authReducer(state = inititialState, action: AuthAction) 
           userName: action.userName,
           currentOrder: action.currentOrder,
           role: action.role,
-          avatar: action.avatar
+          avatar: action.avatar,
+          infoFilled: action.infoFilled
         },
         isLogin: true
     }

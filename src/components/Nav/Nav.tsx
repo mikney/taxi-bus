@@ -17,10 +17,10 @@ const Nav = ({setShow, show}: any) => {
 
 
   function myOrderHandler() {
-    if(role) {
+    if(role !== 2) {
       return () => history.push("/myorder")
-    } else {
-      return () => show === 'myorder' ? setShow(null): setShow('myorder')
+    } else if (role === 2) {
+      return () => setShow('myorder')
     }
   }
   const onClick = [myOrderHandler(), () => dispatch(exitPage())]

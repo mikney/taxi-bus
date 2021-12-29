@@ -39,6 +39,7 @@ export interface CurrentUser {
   userName?: string
   currentOrder?: any
   role?: any
+  infoFilled?: boolean
 }
 export interface UploadPhoto {
   type: AuthActionTypes.AUTH_UPLOAD_PHOTO,
@@ -62,6 +63,7 @@ export interface  UserData {
   currentOrder: any,
   role: any
   avatar?: any
+  infoFilled?: boolean
 }
 
 export interface SetLogin {
