@@ -3,14 +3,21 @@
 export interface CurrentValue {
   from: string,
   orderList: any[]
+  passengersCounter: number
 }
 
 
 export enum CurrentValueActionTypes {
   SET_FROM = 'SET_FROM',
-  GET_ORDERS = "GET_ORDERS"
+  GET_ORDERS = "GET_ORDERS",
+  SET_PASSENGERS = "SET_PASSENGERS"
 }
 
+
+export interface ISetPassengers {
+  type: CurrentValueActionTypes.SET_PASSENGERS
+  payload: number
+}
 
 export interface ISetFrom {
   type: CurrentValueActionTypes.SET_FROM
@@ -23,4 +30,4 @@ export interface GetOrders {
 }
 
 
-export type CurrentValueAction = ISetFrom | GetOrders
+export type CurrentValueAction = ISetFrom | GetOrders | ISetPassengers

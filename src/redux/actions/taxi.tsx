@@ -1,6 +1,8 @@
 import axios from "axios";
 import {checkError401} from "../../Util/checkError";
 import {SPas, TaxiActionTypes} from "../../components/types/taxi";
+import {RootState} from "../reducers/rootReducer";
+import {newMessage} from "../reducers/auth";
 
 
 
@@ -50,10 +52,17 @@ export const sendPassenger = () => {
   return async (dispatch: any, state: any) => {
     try {
       const {time, date, passenger} = state().taxi.currentTaxi
-      const resp = await axios.post('http://localhost:5002/api/taxi/addpassengers', {passenger, time, date})
-
-    } catch (e) {
+      const user = state().auth.currentUser.id
+      console.log(user)
+      const {from, passengersCounter} = state().value
+      const resp: any = await axios.post('http://localhost:5002/api/taxi/addpassengers', {passenger: new Array(passengersCounter).fill(user), time, date, from})
+      console.log(resp)
+      if (resp.status === 201) {
+        dispatch(newMessage(resp.data.message))
+      }
+    } catch (e: any) {
       console.log(e)
+      dispatch(newMessage(e.body.message))
     }
 
   }

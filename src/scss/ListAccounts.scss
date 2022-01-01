@@ -1,0 +1,32 @@
+
+.td-buttons {
+  & button {
+    border: none;
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    display: block;
+    padding: 2px 7px;
+  }
+  & button:nth-last-of-type(2) {
+    border-bottom: 2px solid black;
+  }
+}
+
+
+.tr {
+  border-bottom: #7d7c7c 1px solid;
+  &-avatar {
+    border-radius: 50%;
+    height: 45px;
+  }
+}
+
+.MuiTab-textColorPrimary {
+  color: #57542e !important;
+}
+
+.MuiTabs-indicator {
+  background-color: #fbee61 !important;
+
+}

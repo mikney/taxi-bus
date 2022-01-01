@@ -1,4 +1,4 @@
-import {Auth, AuthAction, AuthActionTypes} from "../../components/types/auth";
+import {Auth, AuthAction, AuthActionTypes, NewMessage} from "../../components/types/auth";
 
 const inititialState: Auth = {
   text: 'Hello chlopak',
@@ -63,7 +63,7 @@ export default function authReducer(state = inititialState, action: AuthAction) 
   }
 }
 
-export const newMessage = (message: string) => ({
+export const newMessage = (message: string): NewMessage => ({
   type: AuthActionTypes.AUTH_NEW_MESSAGE,
   payload: message
 })

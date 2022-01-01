@@ -8,7 +8,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import {RootState} from "../../redux/reducers/rootReducer";
 import {useHistory} from "react-router-dom";
 
-const Nav = ({setShow, show}: any) => {
+const Nav = ({setShow, show, tabs}: any) => {
   const dispatch = useDispatch()
   const nameButton  = ['Мои заказы', 'Выход']
   const buttonIcon = [<AlarmIcon />, <PowerSettingsNewIcon />]
@@ -17,6 +17,9 @@ const Nav = ({setShow, show}: any) => {
 
 
   function myOrderHandler() {
+    if (role === 3) {
+      return () => setShow('listaccount')
+    }
     if(role !== 2) {
       return () => history.push("/myorder")
     } else if (role === 2) {
@@ -26,10 +29,10 @@ const Nav = ({setShow, show}: any) => {
   const onClick = [myOrderHandler(), () => dispatch(exitPage())]
   return (
     <div className="nav">
-      {nameButton.map( (_,index) => {
+      {tabs.map( (tab: any,index: any) => {
         return <NavButton
           key={index + nameButton[index] }
-          name={nameButton[index]}
+          name={tab}
           icon={buttonIcon[index]}
           func ={onClick[index]}
         />

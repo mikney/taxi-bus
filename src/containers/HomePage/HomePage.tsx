@@ -14,6 +14,7 @@ import ToolMessage from "../../components/toolMessage/toolMessage";
 import {newMessage} from "../../redux/reducers/auth";
 import {RootState} from "../../redux/reducers/rootReducer";
 import Admin from "../Admin/Admin";
+import ListAccounts from "../Admin/components/ListAccounts";
 
 const  HomePage = () => {
   const dispatch = useDispatch()
@@ -42,7 +43,7 @@ const  HomePage = () => {
       {role === "taxi" ? < Taxi/> :
         role === 2 ? <>
           <UserInfo />
-          <Nav setShow={setShow} show={show}/>
+          <Nav setShow={setShow} show={show} tabs={['Мои заказы', 'Выход']}/>
           {show === "myorder" ?
             <MyOrder setShow={setShow}/>
             : show === "placeorder" ?
@@ -57,8 +58,12 @@ const  HomePage = () => {
         </>
           : role === 3 ? <>
             <UserInfo />
-            <Nav />
-            <Admin />
+            <Nav setShow={setShow} show={show} tabs={['Список аккаунтов', 'Выход']} />
+            {show === "listaccount" ? <ListAccounts setShow={setShow}/>
+            :  <Admin />
+
+            }
+
           </>
           : null
       }

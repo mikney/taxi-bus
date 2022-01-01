@@ -38,8 +38,11 @@ export const auth = (email: any, password: any, isLongExpire: boolean) => {
       if (resp.data.needCreate) {
         dispatch({type: AuthActionTypes.AUTH_REGISTR, payload: resp.data.needCreate})
       }
-    } catch (e) {
-      console.log(e)
+    } catch (e: any) {
+      console.log(e.response)
+      const message: string = e.response.data.message
+      dispatch(newMessage(message))
+
     }
   }
 }

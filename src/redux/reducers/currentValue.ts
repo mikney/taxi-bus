@@ -1,9 +1,16 @@
-import {CurrentValue, CurrentValueAction, CurrentValueActionTypes, ISetFrom} from "../../components/types/currentValue";
+import {
+  CurrentValue,
+  CurrentValueAction,
+  CurrentValueActionTypes,
+  ISetFrom,
+  ISetPassengers
+} from "../../components/types/currentValue";
 
 
 const initialState: CurrentValue = {
   from: 'Барановичи',
-  orderList: []
+  orderList: [],
+  passengersCounter: 1
 }
 
 
@@ -18,6 +25,10 @@ export default function CurrentValueReducer(state = initialState, action: Curren
       return {
         ...state, orderList: action.payload
       }
+    case CurrentValueActionTypes.SET_PASSENGERS:
+      return {
+        ...state, passengersCounter: action.payload
+      }
     default: return {
       ...state
     }
@@ -27,4 +38,9 @@ export default function CurrentValueReducer(state = initialState, action: Curren
 export const SetFrom = (from: string): ISetFrom => ({
   type: CurrentValueActionTypes.SET_FROM,
   payload: from
+})
+
+export const SetNumberOfPassengers = (number: number): ISetPassengers => ({
+  type: CurrentValueActionTypes.SET_PASSENGERS,
+  payload: number
 })

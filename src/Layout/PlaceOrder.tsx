@@ -42,7 +42,7 @@ const PlaceOrder: FC<PlaceOrderI> = ({show, setShow}) => {
 
 
   const [hide, setHide] = useState(null)
-  const {time, date, passenger, driverName, carMake, numberDay, carPhoto, wifi, tv, v220, avatar, carColor, transporter, number, phoneNumber}: any = useSelector<RootState>((state) => ({
+  const {numberPassengers, from, time, date, passenger, driverName, carMake, numberDay, carPhoto, wifi, tv, v220, avatar, carColor, transporter, number, phoneNumber}: any = useSelector<RootState>((state) => ({
     time: state.taxi.currentTaxi.time,
     date: state.taxi.currentTaxi.date,
     driverName: state.taxi.currentTaxi.driverName,
@@ -55,7 +55,9 @@ const PlaceOrder: FC<PlaceOrderI> = ({show, setShow}) => {
     carColor: state.taxi.currentTaxi.carColor,
     transporter: state.taxi.currentTaxi.transporter,
     number: state.taxi.currentTaxi.number,
-    phoneNumber: state.taxi.currentTaxi.driverPhone
+    phoneNumber: state.taxi.currentTaxi.driverPhone,
+    numberPassengers: state.value.passengersCounter,
+    from: state.value.from
   }))
 
 
@@ -88,12 +90,12 @@ const PlaceOrder: FC<PlaceOrderI> = ({show, setShow}) => {
         </div>
         <div className="from-into">
           <div style={{marginRight: "8px" }}>
-            <div>Барановичи</div>
+            <div>{from}</div>
             <div className="time" style={{textAlign: "right"}}>{time}</div>
           </div>
           <ArrowRightAltIcon className={'arrow'}/>
           <div>
-            <div style={{marginLeft: "8px" }}>Минск</div>
+            <div style={{marginLeft: "8px" }}>{from === "Минск" ? "Барановичи" : "Минск"}</div>
             <div className="time">{timeToConvert(time)}</div>
           </div>
         </div>
@@ -101,11 +103,11 @@ const PlaceOrder: FC<PlaceOrderI> = ({show, setShow}) => {
         <div className="number-seats">
           <div>
             <div>Мест</div>
-            <div style={{fontSize: '28px', paddingTop: '7px'}}>1</div>
+            <div style={{fontSize: '28px', paddingTop: '7px'}}>{numberPassengers}</div>
           </div>
           <div>
             <div>Стоимость</div>
-            <div style={{fontSize: '28px', paddingTop: '7px'}}>9 руб.</div>
+            <div style={{fontSize: '28px', paddingTop: '7px'}}>{numberPassengers * 9} руб.</div>
           </div>
         </div>
       </div>
