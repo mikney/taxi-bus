@@ -16,3 +16,58 @@
     box-shadow: 0 10px 15px -8px
   }
 }
+
+.collapse {
+  $note-item: &;
+  &__table {
+    width: 100%;
+    padding: 10px;
+
+    &-tr {
+      text-align: center;
+      #{$note-item} {
+        &-cost {
+          font-size: 16px;
+        }
+        &-button {
+          border: none;
+          padding: 7px 20px;
+          background-color: #e8e88b;
+          border-radius: 6px;
+          &:hover {
+            background-color: #b9b979;
+          }
+        }
+      }
+
+
+
+      &.first {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        #{$note-item}-photo {
+        }
+        #{$note-item} {
+          &-photo {
+            border-radius: 50%;
+          }
+          &-name {
+            font-weight: bold;
+            padding: 0 10px;
+          }
+          &-route {
+            font-size: 18px;
+            padding: 0 3px;
+          }
+
+        }
+      }
+    }
+
+    &-th {
+      width: 50%;
+    }
+  }
+}

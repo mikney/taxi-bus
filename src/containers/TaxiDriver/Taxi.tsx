@@ -25,7 +25,7 @@ const Taxi = () => {
     <>
       {infoFilled ? <>
         <UserInfo/>
-        <Nav />
+        <Nav tabs={['Мои заказы', 'Выход']}/>
         <Switch>
 
           <Route path={'/taxi/:date'} component={DriverPassengers} />
